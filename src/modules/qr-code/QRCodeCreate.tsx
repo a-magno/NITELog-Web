@@ -22,7 +22,9 @@ const QRCodeCreate = () => {
                 onClick={handleClick}>
                 Gerar Token
             </button>
-            <span>Escaneie o QR Code acima para marcar presença </span>
+            <div>
+            <span className="spanQR">Escaneie o QR Code acima para marcar presença </span>
+            </div>
         </div>
     )
 }

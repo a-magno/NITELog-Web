@@ -1,25 +1,43 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
 
 body {
-    background: linear-gradient(90deg,rgb(42, 12, 75),rgb(59, 17, 104),rgb(123, 37, 214));
-    font-family: 'Poppins', sans-serif;
-    margin: 0;
-    padding: 0;
+  background: linear-gradient(90deg, rgb(42, 12, 75), rgb(59, 17, 104), rgb(123, 37, 214));
+  font-family: 'Poppins', sans-serif;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  min-height: 100vh;
+  width: 100vw;
+  overflow-x: hidden;
 }
+
 
 main {
     background: #ffffff;
     padding: 40px 20px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    width: 400px;
+    box-sizing: border-box;
+    overflow-y: visible;
     height: 100vh;
+    height: auto;
+    position: relative;
 }
 
 .forms {
-    min-width: 33.3333vw;
+    height: 100%;
+    right: 230px;
+    padding-top: 125px;
+    position: relative;
+    box-sizing: border-box;
+    height: 100vh;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    box-sizing: border-box;
+    
+}
+
+.tituloForms {
+    margin-bottom: 24px;
 }
 
 button {
@@ -44,7 +62,7 @@ label {
     font-size: 14px;
 }
 
-.labelSenha{
+.labelSenha {
     margin-top: 25px;
 }
 
@@ -59,11 +77,7 @@ label {
     font-size: 30px;
     margin-bottom: 8px;
     font-weight: 600;
-}
-
-.tituloForms {
-    width: 100%;
-    margin-bottom: 24px;
+    white-space: nowrap;
 }
 
 input {
@@ -135,7 +149,7 @@ input::placeholder {
 .error {
     color: #bd0000;
     font-size: 12px;
-    margin-top: 4px; 
+    margin-top: 4px;
 }
 
 .labelConfirmeSenha {
@@ -148,13 +162,15 @@ input::placeholder {
     margin-bottom: 3px;
 }
 
-.labelCadastrarEmail{
+.labelCadastrarEmail {
     margin-top: 10px;
 }
-.labelCadastrarSenha{
+
+.labelCadastrarSenha {
     margin-top: 10px;
 }
-.Cadastrar{
+
+.Cadastrar {
     border-radius: 8px;
     background: #2a0c4b;
     color: white;
@@ -167,42 +183,44 @@ input::placeholder {
     text-decoration: none;
 }
 
-.campoNome{
+.campoNome {
     margin-bottom: 0px;
 }
 
-.labelEmail{
+.labelEmail {
     margin-top: 25px;
 }
 
-.retornarLogin, .retornarLoginPosicao{
+.retornarLogin,
+.retornarLoginPosicao {
     background: transparent;
     color: #2a0c4b;
     padding: 0px;
     border: none;
     font-weight: bold;
     font-size: 14px;
-    margin-top: 10px;
+    margin-top: 5px;
     width: 100%;
     display: flex;
-    justify-content: flex-end;
-    transform: translateX(-8%);
+    justify-content: center;
 
 }
 
 .sucess {
     color: #2a0580;
     font-size: 12px;
-    margin-top: 4px; 
+    margin-top: 4px;
 }
 
-.logoUJ{
+.logoNite {
     position: absolute;
-    top:40px;
-    left: 400px;
+    left: 700px;
+    top: 50%;
+    transform: translateY(-50%);
 }
 
-.logoNite{
+.logoUJ {
     position: absolute;
-    left:750px;
+    left: 330px;
+    top: 40px;
 }

@@ -54,12 +54,15 @@ const Login = () => {
 
     return (
         <div>
+
             <div className="logoNite">
                 <img src={niteImg} alt="Logo Nite" style={{ width: '350px' }} />
             </div>
+
             <div className="logoUJ">
                 <img src={UJImg} alt="Logo UJ" style={{ width: '50px' }} />
             </div>
+
 
             <form className="forms" onSubmit={handleFormSubmit}>
                 <div>

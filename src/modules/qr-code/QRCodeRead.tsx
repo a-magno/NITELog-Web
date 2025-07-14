@@ -7,7 +7,9 @@ const QRCodeRead = () => {
     return(
         <div className="flex-col">
             <QRCode value={token?.toString() || ''}/>
+            <div>
             <span className="alert">Escaneie o QR Code acima para marcar presença </span>
+            </div>
         </div>
     )
 }

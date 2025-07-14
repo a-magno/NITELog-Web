@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route } from 'react-router';
 
 // import '@styles/index.css'
 import '@styles/index.css'
+import '@styles/home.css';
 import Home from '@pages/Home.tsx';
 import Login from '@/auth/Login.tsx';
 import Register from '@/auth/Register';

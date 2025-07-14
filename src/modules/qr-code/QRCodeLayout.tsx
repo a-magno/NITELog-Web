@@ -5,7 +5,9 @@ import type { PropsWithChildren } from "react"
 const QRCodeLayout = ({children}: PropsWithChildren) => {
     return(
         <main id="qr-code">
-            <h1>QR Code</h1>
+            <div>
+            <h1 className="tituloQR">QR Code</h1>
+            </div>
             {children || <Outlet />}
         </main>
     )

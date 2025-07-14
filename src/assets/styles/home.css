@@ -1,17 +1,146 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
 
-.bodyHome {
-    background: #ffffff;
+body {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    background: #f4f4f8;
+    color: #ffffff;
 }
 
-.login {
-    color: #2a0c4b;
-    font-weight: bold;
-    font-size: 25px;
+.bemVindo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transform: translateX(50%);
+    height: 100%;
+    font-size: 48px;
+    font-weight: 600;
+    color: white;
 }
 
-.loginPosicao {
-   position: absolute;
-   top:5px;
-   right: 10px;
+.logo-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    margin-bottom: 40px;
+}
+
+.logo-title {
+    margin-top: -40px;
+    font-weight: 700;
+    background: linear-gradient(45deg, rgb(65, 3, 116), rgb(147, 47, 235));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 70px;
+    line-height: 1.1;
+    margin-left: -310px;
+}
+
+.logo-title .line1 {
+    margin-bottom: -10px;
+}
+
+.logo-title .line2 {
+  padding-bottom: 5px;
+}
+
+.container {
+    display: flex;
+    height: 100vh;
+}
+
+.sidebar {
+    width: 260px;
+    background-color: #ffffff;
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+    padding: 15px 60px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+}
+
+.logo-nite {
+    width: 180px;
+    margin-bottom: 40px;
+    align-self: center;
+}
+
+
+
+.logo-uj {
+    width: 40px;
+    align-self: center;
+    margin-top: 20px;
+}
+
+.menu {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.menu-button {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background-color: rgb(65, 3, 116);
+    color: white;
+    padding: 12px;
+    border-radius: 10px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: transform 0.2s ease;
+}
+
+.menu-button:hover {
+    transform: scale(1.03);
+}
+
+.menu-button.secondary {
+    background-color: transparent;
+    color: rgb(65, 3, 116);
+    border: 2px solid rgb(65, 3, 116);
+}
+
+.footer-links {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    font-size: 13px;
+    margin-top: auto;
+}
+
+.footer-links a {
+    color: rgb(65, 3, 116);
+    text-decoration: none;
+}
+
+.footer-links a:hover {
+    text-decoration: underline;
+}
+
+.main-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 40px;
+}
+
+.main-content h1 {
+    font-size: 48px;
+    margin-bottom: 10px;
+}
+
+.main-content p {
+    font-size: 18px;
+    opacity: 0.8;
 }
