@@ -13,7 +13,9 @@ import QRCodeLayout from "@/qr-code/QRCodeLayout.tsx";
 import routes from "./routes";
 import DocsIndex from "./modules/docs/Docs";
 import DocsLayout from "@/docs/DocsLayout";
-import HomeLayout from "./pages/HomeLayout";
+import QRCodeRead from "@/qr-code/QRCodeRead";
+import QRCodeCreate from "@/qr-code/QRCodeCreate";
+// import HomeLayout from "./pages/HomeLayout";
 
 const root = document.getElementById("root");
 
