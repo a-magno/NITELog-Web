@@ -1,146 +1,142 @@
 import type React from "react";
-import { Link } from 'react-router';
+import { Link } from "react-router";
 import { useEffect, useState } from "react";
 import validateEmail from "../../utils/validateEmail";
 import { handleInputChange } from "../../utils/handleEmailChange";
 import { apiService } from "../../services/apiServices";
-import niteImg from '../../assets/imagens/nite_6.png';
-import UJImg from '../../assets/imagens/unnamed.png';
+import niteImg from "@images/nite-logo.png";
+import UJImg from "@images/unijorge-logo.png";
 
 const Login = () => {
-    const [formData, setFormData] = useState({
-        email: '',
-        password: ''
-    });
-    const [errors, setErrors] = useState({
-        emailRequired: false,
-        emailInvalid: false,
-        passwordInvalid: false
-    });
+  const [formData, setFormData] = useState({
+    email: "",
+    password: "",
+  });
+  const [errors, setErrors] = useState({
+    emailRequired: false,
+    emailInvalid: false,
+    passwordInvalid: false,
+  });
 
-    const [isValid, setIsValid] = useState(false);
-    const [validationEnabled, setValidationEnabled] = useState(false);
+  const [isValid, setIsValid] = useState(false);
+  const [validationEnabled, setValidationEnabled] = useState(false);
 
-    useEffect(() => {
-        if (validationEnabled) {
-            const newErrors = {
-                emailRequired: formData.email.trim() === '',
-                emailInvalid: formData.email.trim() !== '' && !validateEmail(formData.email),
-                passwordInvalid: formData.password.trim() === ''
-            };
+  useEffect(() => {
+    if (validationEnabled) {
+      const newErrors = {
+        emailRequired: formData.email.trim() === "",
+        emailInvalid:
+          formData.email.trim() !== "" && !validateEmail(formData.email),
+        passwordInvalid: formData.password.trim() === "",
+      };
 
-            setErrors(newErrors);
-            setIsValid(Object.values(newErrors).every(error => error === false));
-        }
-    }, [formData, validationEnabled]);
-
-    const enableValidation = () => setValidationEnabled(true);
-
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement>, fieldName: keyof typeof formData) => {
-        handleInputChange(e, formData, setFormData, fieldName);
+      setErrors(newErrors);
+      setIsValid(Object.values(newErrors).every((error) => error === false));
     }
+  }, [formData, validationEnabled]);
 
-    const handleFormSubmit = (e: React.FormEvent) => {
-        e.preventDefault();
-        enableValidation();
+  const enableValidation = () => setValidationEnabled(true);
 
-        setTimeout(() => {
-            if (isValid) {
-                apiService.loginUser(formData);
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement>,
+    fieldName: keyof typeof formData
+  ) => {
+    handleInputChange(e, formData, setFormData, fieldName);
+  };
 
-            }
-        }, 0);
-    }
+  const handleFormSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    enableValidation();
 
-    return (
+    setTimeout(() => {
+      if (isValid) {
+        apiService
+          .loginUser(formData)
+          .then((response) => alert(response))
+          .catch((error) => alert(error));
+      }
+    }, 100);
+  };
+
+  return (
+    <div>
+      <div className="logoNite">
+        <img src={niteImg} alt="Logo Nite" style={{ width: "350px" }} />
+      </div>
+
+      <div className="logoUJ">
+        <img src={UJImg} alt="Logo UJ" style={{ width: "50px" }} />
+      </div>
+
+      <form className="forms" onSubmit={handleFormSubmit}>
         <div>
-
-            <div className="logoNite">
-                <img src={niteImg} alt="Logo Nite" style={{ width: '350px' }} />
+          <label>Email</label>
+          <input
+            type="email"
+            name="email"
+            id="email"
+            className="campoEmail"
+            value={formData.email}
+            placeholder="Digite seu email"
+            onChange={(e) => handleChange(e, "email")}
+            onBlur={enableValidation}
+          />
+          {errors.emailRequired && (
+            <div className="error" id="email-required-error">
+              Campo obrigatório
             </div>
-
-            <div className="logoUJ">
-                <img src={UJImg} alt="Logo UJ" style={{ width: '50px' }} />
+          )}
+          {!errors.emailRequired && errors.emailInvalid && (
+            <div className="error" id="email-invalid-error">
+              Email inválido
             </div>
-
-
-            <form className="forms" onSubmit={handleFormSubmit}>
-                <div>
-                    <label>
-                        Email
-                    </label>
-                    <input
-                        type="email"
-                        name="email"
-                        id="email"
-                        className="campoEmail"
-                        value={formData.email}
-                        placeholder="Digite seu email"
-                        onChange={(e) => handleChange(e, 'email')}
-                        onBlur={enableValidation}
-                    />
-                    {errors.emailRequired && (
-                        <div
-                            className="error"
-                            id="email-required-error">
-                            Campo obrigatório
-                        </div>
-                    )}
-                    {!errors.emailRequired && errors.emailInvalid && (
-                        <div
-                            className="error"
-                            id="email-invalid-error">
-                            Email inválido
-                        </div>
-                    )}
-                </div>
-
-                <div>
-                    <label className="labelSenha">
-                        Senha
-                    </label>
-                    <input
-                        type="password"
-                        id="password"
-                        name="password"
-                        className="campoSenha"
-                        value={formData.password}
-                        placeholder="Digite sua senha"
-                        onChange={(e) => handleChange(e, 'password')}
-                        onBlur={enableValidation}
-                    />
-                    {errors.passwordInvalid && (
-                        <div
-                            className="error"
-                            id="password-required-error">
-                            Campo obrigatório
-                        </div>
-                    )}
-                    <div className="esqueciSenhaPosicao">
-                        <Link to="/resetPassword" className="esqueciSenha">Esqueceu a senha?</Link>
-                    </div>
-                </div>
-
-                <div>
-                    <button
-                        type="submit"
-                        className="entrar"
-                        id="login-button"
-                        disabled={!isValid}>Entrar</button>
-                </div>
-
-                <div className="register">
-                    <span>Não tem uma conta?</span>
-                    <Link
-                        to="/register"
-                        className="fazerCadastro">
-                        Fazer cadastro
-                    </Link>
-                </div>
-
-            </form>
+          )}
         </div>
-    )
-}
+
+        <div>
+          <label className="labelSenha">Senha</label>
+          <input
+            type="password"
+            id="password"
+            name="password"
+            className="campoSenha"
+            value={formData.password}
+            placeholder="Digite sua senha"
+            onChange={(e) => handleChange(e, "password")}
+            onBlur={enableValidation}
+          />
+          {errors.passwordInvalid && (
+            <div className="error" id="password-required-error">
+              Campo obrigatório
+            </div>
+          )}
+          <div className="esqueciSenhaPosicao">
+            <Link to="/resetPassword" className="esqueciSenha">
+              Esqueceu a senha?
+            </Link>
+          </div>
+        </div>
+
+        <div>
+          <button
+            type="submit"
+            className="entrar"
+            id="login-button"
+            disabled={!isValid}
+          >
+            Entrar
+          </button>
+        </div>
+
+        <div className="register">
+          <span>Não tem uma conta?</span>
+          <Link to="/register" className="fazerCadastro">
+            Fazer cadastro
+          </Link>
+        </div>
+      </form>
+    </div>
+  );
+};
 
 export default Login;

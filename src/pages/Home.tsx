@@ -1,7 +1,7 @@
 import { Link } from "react-router";
 import routes from "@routes";
-import niteImg from "./../assets/imagens/nite_6.png";
-import UJImg from "./../assets/imagens/unnamed.png";
+import niteImg from "./../assets/images/nite-logo.png";
+import UJImg from "./../assets/images/unijorge-logo.png";
 
 const Home = () => {
   return (
