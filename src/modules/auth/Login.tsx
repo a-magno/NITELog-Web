@@ -5,7 +5,6 @@ import validateEmail from "../../utils/validateEmail";
 import { handleInputChange } from "../../utils/handleEmailChange";
 import { apiService } from "../../services/apiServices";
 import niteImg from "@images/nite-logo.png";
-import UJImg from "@images/unijorge-logo.png";
 
 const Login = () => {
   const [formData, setFormData] = useState({
@@ -59,16 +58,10 @@ const Login = () => {
   };
 
   return (
-    <div className="login-content">
-      <section>
-        <div className="logoNite">
-          <img src={niteImg} alt="Logo Nite" style={{ width: "350px" }} />
-        </div>
-
-        <div className="logoUJ">
-          <img src={UJImg} alt="Logo UJ" />
-        </div>
-      </section>
+    <>
+      {/* <div className="logoNite">
+        <img src={niteImg} alt="Logo Nite" style={{ width: "350px" }} />
+      </div> */}
 
       <form className="forms" onSubmit={handleFormSubmit}>
         <div>
@@ -137,7 +130,7 @@ const Login = () => {
           </Link>
         </div>
       </form>
-    </div>
+    </>
   );
 };
 

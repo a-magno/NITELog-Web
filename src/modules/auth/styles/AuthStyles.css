@@ -1,28 +1,40 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
 
-main {
+main#auth {
     background: #ffffff;
-    padding: 40px 20px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-    width: 400px;
+    display: flex;
+    width: 492px;
+    flex-direction: column;
+    align-items: flex-start;
     box-sizing: border-box;
-    overflow-y: visible;
-    position: relative;
+    padding: 0 64px;
+    overflow-y: auto;
 }
 
-.forms {
-    height: 100%;
-    right: 230px;
-    padding-top: 2em;
-    position: relative;
-    box-sizing: border-box;
-    height: 100vh;
+.tituloForms {
+    display: flex;
+    flex-direction: column;
+    margin: 24px 0 0;
+}
+.tituloForms>.flex-row {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.login-content {
     display: flex;
     flex-direction: column;
 }
 
-.tituloForms {
-    margin-bottom: 24px;
+.forms {
+    height: 100%;
+    margin-top: 1em;
+    box-sizing: border-box;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
 }
 
 button {
@@ -205,7 +217,7 @@ input::placeholder {
 }
 
 .logoUJ {
-    margin: 0 32px;
+    margin: 0 16px;
     width: min-content;
     object-fit: contain;
 }

@@ -7,7 +7,7 @@
   --background-color-rgb: rgb(36, 36, 36);
   --background-color-hex: #242424;
 
-  --action-text-color-hex: #646cff;
+  --action-text-color-hex: #7b25d6;
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
@@ -41,7 +41,7 @@ body {
 }
 main {
   display: flex;
-  min-width: 320px;
+  /* min-width: 320px; */
 }
 
 h1 {

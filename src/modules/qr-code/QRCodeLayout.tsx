@@ -1,16 +1,17 @@
-import { Outlet } from "react-router"
-import '@styles/qrcode.css'
-import type { PropsWithChildren } from "react"
+import { Outlet } from "react-router";
+import type { PropsWithChildren } from "react";
+import NavBar from "@root/shared/Navbar";
+import "@styles/qrcode.css";
 
-const QRCodeLayout = ({children}: PropsWithChildren) => {
-    return(
-        <main id="qr-code">
-            <div>
-            <h1 className="tituloQR">QR Code</h1>
-            </div>
-            {children || <Outlet />}
-        </main>
-    )
-}
+const QRCodeLayout = ({ children }: PropsWithChildren) => {
+  return (
+    <>
+      <header>
+        <NavBar />
+      </header>
+      <main>{children || <Outlet />}</main>
+    </>
+  );
+};
 
-export default QRCodeLayout
+export default QRCodeLayout;
