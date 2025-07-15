@@ -1,17 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
 
-body {
-  background: linear-gradient(90deg, rgb(42, 12, 75), rgb(59, 17, 104), rgb(123, 37, 214));
-  font-family: 'Poppins', sans-serif;
-  margin: 0;
-  padding: 0;
-  display: flex;
-  min-height: 100vh;
-  width: 100vw;
-  overflow-x: hidden;
-}
-
-
 main {
     background: #ffffff;
     padding: 40px 20px;
@@ -19,21 +7,18 @@ main {
     width: 400px;
     box-sizing: border-box;
     overflow-y: visible;
-    height: 100vh;
-    height: auto;
     position: relative;
 }
 
 .forms {
     height: 100%;
     right: 230px;
-    padding-top: 125px;
+    padding-top: 2em;
     position: relative;
     box-sizing: border-box;
     height: 100vh;
     display: flex;
     flex-direction: column;
-    
 }
 
 .tituloForms {
@@ -220,7 +205,11 @@ input::placeholder {
 }
 
 .logoUJ {
-    position: absolute;
-    left: 330px;
-    top: 40px;
+    margin: 0 32px;
+    width: min-content;
+    object-fit: contain;
+}
+
+.logoUJ>img {
+    height: 58px;
 }

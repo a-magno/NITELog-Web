@@ -1,5 +1,6 @@
 import type { PropsWithChildren } from "react";
 import { Outlet } from "react-router";
+import "@styles/index.css";
 import "./styles/AuthStyles.css";
 import NavBar from "@root/shared/Navbar";
 

@@ -65,7 +65,7 @@ const Login = () => {
       </div>
 
       <div className="logoUJ">
-        <img src={UJImg} alt="Logo UJ" style={{ width: "50px" }} />
+        <img src={UJImg} alt="Logo UJ" />
       </div>
 
       <form className="forms" onSubmit={handleFormSubmit}>
