@@ -1,12 +1,12 @@
 const routes = {
   AUTH: {
-    LOGIN: "login",
-    REGISTER: "register",
-    PASSWORD: "resetPassword",
+    LOGIN: "/login",
+    REGISTER: "/register",
+    PASSWORD: "/resetPassword",
   },
   HOME: "/",
-  QRCODE: "qr-code",
-  DOCS: "docs",
+  QRCODE: "/qr-code",
+  DOCS: "/docs",
   QRCODE_GEN: "generate",
 };
 
