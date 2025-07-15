@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import validateEmail from "../../utils/validateEmail";
 import { handleInputChange } from "../../utils/handleEmailChange";
 import { apiService } from "../../services/apiServices";
-import niteImg from "@images/nite-logo.png";
+// import niteImg from "@images/nite-logo.png";
 
 const Login = () => {
   const [formData, setFormData] = useState({

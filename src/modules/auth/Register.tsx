@@ -4,7 +4,6 @@ import { handleInputChange } from "../../utils/handleEmailChange";
 import { apiService } from "../../services/apiServices";
 import { Link } from "react-router";
 import niteImg from "@images/nite-logo.png";
-import UJImg from "@images/unijorge-logo.png";
 
 const Register = () => {
   const [formData, setFormData] = useState({
@@ -92,9 +91,10 @@ const Register = () => {
     if (!isValid) return;
 
     const data = {
-      password: formData.confirmPassword,
       email: formData.email,
       username: formData.username,
+      password: formData.confirmPassword,
+      registration: formData.matricula,
     };
     console.log(data);
     apiService.registerUser(data);
@@ -104,9 +104,6 @@ const Register = () => {
     <div>
       <div className="logoNite">
         <img src={niteImg} alt="Logo Nite" style={{ width: "350px" }} />
-      </div>
-      <div className="logoUJ">
-        <img src={UJImg} alt="Logo UJ" style={{ width: "50px" }} />
       </div>
       <form className="forms" onSubmit={handleFormSubmit} noValidate>
         <div>

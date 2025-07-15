@@ -1,8 +1,11 @@
 // src/services/apiService.ts
 
-
 // --- Configuration ---
-const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://nitelogdev.discloud.com'; // Adjust if your Go API runs elsewhere or has a different base
+const API_BASE_URL =
+  import.meta.env.VITE_API_URL || "http://nitelogdev.discloud.app"; // Adjust if your Go API runs elsewhere or has a different base
+
+const USER_CREATE_URL = "users/";
+const USER_LOGIN_URL = "users/login";
 
 // --- Shared Types/Interfaces ---
 export interface User {
@@ -47,7 +50,9 @@ async function handleResponse<T>(response: Response): Promise<T> {
   } else {
     // Handle non-JSON responses if necessary, or assume error for this context
     if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status} - ${response.statusText}`);
+      throw new Error(
+        `HTTP error! status: ${response.status} - ${response.statusText}`
+      );
     }
     // If it's OK but not JSON, and you expect JSON, this might be an issue.
     // For now, we'll assume T might be void or the API should always return JSON for data/errors.
@@ -56,7 +61,9 @@ async function handleResponse<T>(response: Response): Promise<T> {
 
   if (!response.ok) {
     const error: Error & { data?: ApiErrorData } = new Error(
-      `API Error: ${response.status} - ${responseData?.message || response.statusText}`
+      `API Error: ${response.status} - ${
+        responseData?.message || response.statusText
+      }`
     );
     error.data = responseData; // Attach the full error data
     throw error;
@@ -72,10 +79,11 @@ export const apiService = {
    * @returns A promise that resolves to an AuthResponse (token and user data).
    */
   loginUser: async (credentials: LoginPayload): Promise<AuthResponse> => {
-    const response = await fetch(`${API_BASE_URL}/users/login`, { // Assuming /auth/login endpoint
-      method: 'POST',
+    const response = await fetch(`${API_BASE_URL}/${USER_LOGIN_URL}`, {
+      // Assuming /auth/login endpoint
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
       body: JSON.stringify(credentials),
     });
@@ -88,14 +96,16 @@ export const apiService = {
    * @returns A promise that resolves to an AuthResponse (token and user data) or just User.
    * Adjust AuthResponse if registration returns something different than login.
    */
-  registerUser: async (userData: RegisterPayload): Promise<AuthResponse> => { // Or Promise<User> depending on API
-    const response = await fetch(`${API_BASE_URL}/users/register`, { // Assuming /auth/register endpoint
-      method: 'POST',
+  registerUser: async (userData: RegisterPayload): Promise<AuthResponse> => {
+    // Or Promise<User> depending on API
+    const response = await fetch(`${API_BASE_URL}/${USER_CREATE_URL}`, {
+      // Assuming /auth/register endpoint
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
 
-      body: JSON.stringify( userData ),
+      body: JSON.stringify(userData),
     });
     return handleResponse<AuthResponse>(response); // Adjust if API returns different structure for register
   },
@@ -106,16 +116,18 @@ export const apiService = {
    * @param token - The authentication token.
    * @returns A promise that resolves to an array of MyData.
    */
-  getSomeProtectedData: async (token: string): Promise<any[]> => { // Replace 'any' with your specific data type
-    const response = await fetch(`${API_BASE_URL}/protected/data`, { // Example protected endpoint
-      method: 'GET',
+  getSomeProtectedData: async (token: string): Promise<any[]> => {
+    // Replace 'any' with your specific data type
+    const response = await fetch(`${API_BASE_URL}/protected/data`, {
+      // Example protected endpoint
+      method: "GET",
       headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${token}`, // Standard way to send JWT
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`, // Standard way to send JWT
       },
     });
     return handleResponse<any[]>(response);
-  }
+  },
   // Add other API functions here (e.g., createItem, updateItem, etc.)
   // Remember to add the 'Authorization' header if they are protected routes.
 };
