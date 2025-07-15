@@ -59,14 +59,16 @@ const Login = () => {
   };
 
   return (
-    <div>
-      <div className="logoNite">
-        <img src={niteImg} alt="Logo Nite" style={{ width: "350px" }} />
-      </div>
+    <div className="login-content">
+      <section>
+        <div className="logoNite">
+          <img src={niteImg} alt="Logo Nite" style={{ width: "350px" }} />
+        </div>
 
-      <div className="logoUJ">
-        <img src={UJImg} alt="Logo UJ" />
-      </div>
+        <div className="logoUJ">
+          <img src={UJImg} alt="Logo UJ" />
+        </div>
+      </section>
 
       <form className="forms" onSubmit={handleFormSubmit}>
         <div>
