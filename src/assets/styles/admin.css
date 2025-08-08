@@ -1,3 +1,8 @@
+:root {
+    --tab-border-radius: 8px;
+    --tabs-container-gap: 4px;
+}
+
 #admin>div {
     margin: 2em;
     margin-top: 0;
@@ -14,14 +19,7 @@
 }
 
 
-.table-container {
-    border: solid 2px var(--grey-hex);
-    border-top: none;
-    background-color: var(--text-color-rgb);
-    height: 60vh;
-    border-end-start-radius: 16px;
-    border-end-end-radius: 16px;
-}
+/* Search Bar Buttons */
 
 .searchbar>button.searchButton {
     border-end-start-radius: 0;
@@ -53,5 +51,61 @@
 
 .searchbar>input.searchInput {
     margin: 4px;
+    font-weight: 500;
+    font-size: 24px;
+    color: --black-hex;
     flex-grow: 1;
+}
+input.searchInput:focus {
+    outline: solid 3px var(--light-purple-rgb);
+}
+.searchbar> * span{
+    font-size: 24px;
+}
+
+/* Table Container */
+
+.table-container {
+    /* border: solid 2px var(--grey-hex); */
+    border-top: none;
+    background-color: var(--text-color-rgb);
+    height: 60vh;
+    border-end-start-radius: 16px;
+    border-end-end-radius: 16px;
+}
+
+/* Tabs */
+
+ul.tabs-container {
+    font-size: 16px;
+    margin: 0;
+    padding-top: 0.5em;
+    display: flex;
+    flex-direction: row;
+    list-style: none;
+    gap: var(--tabs-container-gap);
+    background-color:var(--medium-purple-rgb);
+    border-bottom: solid 3px var(--black-hex);
+}
+ul.tabs-container>li.tab-option {
+    font-weight: 600;
+    color: var(--white-hex);
+    background-color: var(--light-purple-rgb);
+    border-start-start-radius: var(--tab-border-radius);
+    border-start-end-radius: var(--tab-border-radius);
+    padding: 0.5em 1.75em 0.2em;
+    cursor: pointer;
+}
+ul.tabs-container>li.tab-option:not(.active):hover {
+    color: var(--grey-hex);
+    background-color: var(--dark-purple-rgb);
+    transition: all 0.2s ease-in;
+    opacity: 0.4;
+}
+ul.tabs-container>li.tab-option.active {
+    color: var(--black-hex);
+    opacity: 0.3;
+    background-color: var(--grey-hex);
+    cursor: default;
+
 }
