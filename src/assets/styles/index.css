@@ -21,6 +21,10 @@
   --action-text-color-rgb: var(--light-purple-rgb);
   --action-text-color-hex: #7b25d6;
 
+  /* Background Gradient */
+  --background-linear-gradient: linear-gradient(0deg, var(--medium-purple-rgb), 20%, var(--light-purple-rgb));
+
+
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;

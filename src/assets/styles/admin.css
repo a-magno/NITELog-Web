@@ -1,4 +1,5 @@
 :root {
+    --searchbar-border-radius: 16px;
     --tab-border-radius: 8px;
     --tabs-container-gap: 4px;
 }
@@ -13,7 +14,8 @@
     flex-direction: row;
     align-items: stretch;
     border: solid 3px var(--medium-purple-rgb);
-    border-radius: 16px;
+    border-radius: var(--searchbar-border-radius);
+    background-color: var(--medium-purple-rgb);
     border-end-start-radius: 0;
     border-end-end-radius: 0;
 }
@@ -21,9 +23,14 @@
 /* Search Bar Buttons */
 
 .searchbar>button.searchButton {
+    border-radius: calc(var(--searchbar-border-radius) * 0.75);
     border-end-start-radius: 0;
     border-end-end-radius: 0;
-    background-color: transparent;
+    background: var(--background-linear-gradient);
+    background-color: var(--light-purple-rgb);
+    border: none;
+    outline: none;
+
 }
 .searchbar>button:first-child {
     border-top-right-radius: 0;
@@ -34,22 +41,27 @@
     border-bottom-left-radius: 0;
 }
 .searchbar>button.searchButton:hover {
-    background-color: var(--dark-purple-rgb);;
-    border: transparent 1px solid;
+    background: var(--medium-purple-rgb);
+    transition: background 0.25s ease-in-out;
+    border: none;
+    outline: none;
+}
+.search>button.searchButton:focus {
+    outline: none;
 }
 .searchbar>button.searchButton:hover>i,
 .searchbar>button.searchButton:hover>* {
-    color: var(--white-hex);
+    color: var(--grey-hex);
 }
 .searchbar>button.searchButton>i,
 .searchbar>button.searchButton>* {
     font-weight: 600;
-    color: var(--action-text-color-hex);
+    color: var(--white-hex);
     padding: 0.1em;
 }
 
 .searchbar>input.searchInput {
-    margin: 4px;
+    margin: 4px 5px;
     font-weight: 500;
     font-size: 24px;
     color: --black-hex;
@@ -95,6 +107,7 @@ ul.tabs-container>li.tab-option>button{
     border-start-end-radius: var(--tab-border-radius);
     padding: 0.5em 1.75em 0.2em;
     cursor: pointer;
+    user-select: none;
 }
 ul.tabs-container>li.tab-option:not(.active):hover {
     color: var(--grey-hex);
