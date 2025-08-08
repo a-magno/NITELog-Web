@@ -8,6 +8,9 @@ const routes = {
   QRCODE: "/qr-code",
   DOCS: "/docs",
   QRCODE_GEN: "generate",
+  ADMIN: {
+    INDEX: "/admin",
+  },
 };
 
 export default routes;

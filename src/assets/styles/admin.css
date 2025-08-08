@@ -1,0 +1,12 @@
+.searchbar { 
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    border: solid 3px var(--background-color-hex);
+    border-radius: 16px;
+}
+
+.searchbar> i.searchIcon {
+    color: var(--action-text-color-hex);
+    padding: 0.2em;
+}
