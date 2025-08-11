@@ -2,9 +2,10 @@
 
 // --- Configuration ---
 const API_BASE_URL =
-  import.meta.env.VITE_API_URL || "http://nitelogdev.discloud.app"; // Adjust if your Go API runs elsewhere or has a different base
+  import.meta.env.VITE_API_URL || "http://nitelogdev.discloud.app";
 
 const USER_CREATE_URL = "users/";
+const MEETINGS_ROUTE = "meetings/"
 const USER_LOGIN_URL = "users/login";
 
 // --- Shared Types/Interfaces ---
@@ -38,6 +39,21 @@ export interface ApiErrorData {
   message?: string;
   errors?: Record<string, string[]>; // For field-specific errors
   // Add any other error fields your API might return
+}
+
+export interface MeetingPayload{
+  date : string;
+}
+
+export interface MeetingResponse{
+  error? : string;
+  existing_meeting? : Object;
+  attendance? : Array<Object>;
+  created_at? : string;
+  date? : string;
+  deleted_at? : string;
+  id? : string;
+  meeting_code? : string;
 }
 
 // --- Helper Function to Handle API Responses ---
@@ -132,4 +148,16 @@ export const apiService = {
   // },
   // Add other API functions here (e.g., createItem, updateItem, etc.)
   // Remember to add the 'Authorization' header if they are protected routes.
+
+  //Verifica se existe uma reunião para uma dada data, se sim, retorna os dados, senão, cria e retorna.
+  checkOrCreateMeeting: async( meetingData : MeetingPayload): Promise<MeetingResponse> =>{
+    const response = await fetch(`${API_BASE_URL}/${MEETINGS_ROUTE}`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(meetingData),
+    });
+    return handleResponse<MeetingResponse>(response)
+  }
 };
