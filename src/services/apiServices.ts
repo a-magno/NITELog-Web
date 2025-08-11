@@ -126,24 +126,26 @@ export const apiService = {
     return handleResponse<AuthResponse>(response); // Adjust if API returns different structure for register
   },
 
-  // --- Example GET request (can be expanded) ---
-  /**
-   * Fetches some generic data (requires authentication typically).
-   * @param token - The authentication token.
-   * @returns A promise that resolves to an array of MyData.
-   */
-  getSomeProtectedData: async (token: string): Promise<any[]> => {
-    // Replace 'any' with your specific data type
-    const response = await fetch(`${API_BASE_URL}/protected/data`, {
-      // Example protected endpoint
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`, // Standard way to send JWT
-      },
-    });
-    return handleResponse<any[]>(response);
-  },
+
+
+  // // --- Example GET request (can be expanded) ---
+  // /**
+  //  * Fetches some generic data (requires authentication typically).
+  //  * @param token - The authentication token.
+  //  * @returns A promise that resolves to an array of MyData.
+  //  */
+  // getSomeProtectedData: async (token: string): Promise<any[]> => {
+  //   // Replace 'any' with your specific data type
+  //   const response = await fetch(`${API_BASE_URL}/protected/data`, {
+  //     // Example protected endpoint
+  //     method: "GET",
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //       Authorization: `Bearer ${token}`, // Standard way to send JWT
+  //     },
+  //   });
+  //   return handleResponse<any[]>(response);
+  // },
   // Add other API functions here (e.g., createItem, updateItem, etc.)
   // Remember to add the 'Authorization' header if they are protected routes.
 
