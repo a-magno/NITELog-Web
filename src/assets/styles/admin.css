@@ -109,19 +109,24 @@ ul.tabs-container>li.tab-option>button{
     cursor: pointer;
     user-select: none;
 }
-ul.tabs-container>li.tab-option:not(.active):hover {
+ul.tabs-container>li.tab-option.active {
+    opacity: 0.3;
+    cursor: default;
+}
+ul.tabs-container>li.tab-option:not(.active):hover > :not(:disabled) {
     color: var(--grey-hex);
     background-color: var(--dark-purple-rgb);
     transition: all 0.2s ease-in;
     opacity: 0.4;
 }
-ul.tabs-container>li.tab-option.active {
-    color: var(--black-hex);
-    opacity: 0.3;
-    cursor: default;
-}
 ul.tabs-container>li.tab-option.active>button {
     color: var(--dark-purple-rgb);
     background-color: var(--grey-hex);
     outline: var(--white-hex);
+}
+ul.tabs-container>li.tab-option>button:disabled {
+    border: none;
+    cursor: default;
+    color: var(--grey-hex);
+    background-color: var(--black-hex);
 }
