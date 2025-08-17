@@ -8,7 +8,14 @@ const USER_CREATE_URL = "users/";
 const MEETINGS_ROUTE = "meetings/"
 const USER_LOGIN_URL = "users/login";
 
-// --- Shared Types/Interfaces ---
+// --- TYPES ---
+
+interface GenericResponse {
+  status: string;
+  code: string;
+  message: string;
+}
+
 export interface User {
   id: string; // Or number, depending on your API
   name: string;
@@ -34,11 +41,12 @@ export interface RegisterPayload {
   username: string;
 }
 
-// Generic API Error structure (customize if your API has a specific error format)
-export interface ApiErrorData {
-  message?: string;
-  errors?: Record<string, string[]>; // For field-specific errors
-  // Add any other error fields your API might return
+export interface Meeting {
+  date: string,
+  created_at: string;
+  deleted_at: string;
+  id: string;
+  meeting_code: string;
 }
 
 export interface MeetingPayload{
@@ -56,8 +64,18 @@ export interface MeetingResponse{
   meeting_code? : string;
 }
 
+
+
+// --- ERROS DATA --- 
+// Generic API Error structure (customize if your API has a specific error format)
+export interface ApiErrorData {
+  message?: string;
+  errors?: Record<string, string[]>; // For field-specific errors
+  // Add any other error fields your API might return
+}
+
 // --- Helper Function to Handle API Responses ---
-async function handleResponse<T>(response: Response): Promise<T> {
+async function handleResponse<T>(response: Response): Promise<GenericResponse> {
   const contentType = response.headers.get("content-type");
   let responseData;
 
@@ -70,6 +88,7 @@ async function handleResponse<T>(response: Response): Promise<T> {
         `HTTP error! status: ${response.status} - ${response.statusText}`
       );
     }
+
     // If it's OK but not JSON, and you expect JSON, this might be an issue.
     // For now, we'll assume T might be void or the API should always return JSON for data/errors.
     return undefined as T; // Or handle as appropriate if non-JSON success is expected
@@ -126,7 +145,27 @@ export const apiService = {
     return handleResponse<AuthResponse>(response); // Adjust if API returns different structure for register
   },
 
+  getMeetings: async (): Promise<GenericResponse[]> => {
+    const response = await fetch(`${API_BASE_URL}/protected/data`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    return handleResponse<GenericResponse[]>(response)
+  },
 
+  //Verifica se existe uma reunião para uma dada data, se sim, retorna os dados, senão, cria e retorna.
+  checkOrCreateMeeting: async( meetingData : MeetingPayload): Promise<MeetingResponse> =>{
+    const response = await fetch(`${API_BASE_URL}/${MEETINGS_ROUTE}`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(meetingData),
+    });
+    return handleResponse<MeetingResponse>(response)
+  }
 
   // // --- Example GET request (can be expanded) ---
   // /**
@@ -148,16 +187,4 @@ export const apiService = {
   // },
   // Add other API functions here (e.g., createItem, updateItem, etc.)
   // Remember to add the 'Authorization' header if they are protected routes.
-
-  //Verifica se existe uma reunião para uma dada data, se sim, retorna os dados, senão, cria e retorna.
-  checkOrCreateMeeting: async( meetingData : MeetingPayload): Promise<MeetingResponse> =>{
-    const response = await fetch(`${API_BASE_URL}/${MEETINGS_ROUTE}`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(meetingData),
-    });
-    return handleResponse<MeetingResponse>(response)
-  }
 };
