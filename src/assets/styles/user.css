@@ -1,0 +1,54 @@
+
+main#user {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    width: 100%;
+    align-items: stretch;
+}
+
+#user h1 {
+    text-align: start;
+    font-size: 32px;
+}
+
+main#user>div {
+    flex-grow: 1;
+    display: grid;
+    grid-template-columns: 320px auto;
+}
+
+.user-panel {
+    background-color: grey;
+    margin: 32px 64px;
+    border: solid 3px black;
+    border-radius: 8px;
+}
+
+.user-photo-panel {
+    display: flex;
+    flex-direction: column;
+    justify-items: center;
+    border: solid 2px black;
+    border-radius: 8px;
+    background-color: white;
+}
+
+
+.user-photo-panel>img {
+    height: 320px;
+    width: 320px;
+    padding: 8px;
+    /* border: solid 2px black;  */
+}
+
+.user-photo-panel span.badge {
+    font-weight: 600;
+    text-align: center;
+    color: grey;
+    border: solid 3px grey;
+    border-radius: 8px;
+    margin: 0 0.75em;
+}
+
+

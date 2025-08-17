@@ -11,6 +11,9 @@ const routes = {
   ADMIN: {
     INDEX: "/admin",
   },
+  USER: {
+    INDEX: "/user",
+  }
 };
 
 export default routes;

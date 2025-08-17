@@ -16,6 +16,7 @@ import DocsLayout from "@/docs/DocsLayout";
 import QRCodeRead from "@/qr-code/QRCodeRead";
 import QRCodeCreate from "@/qr-code/QRCodeCreate";
 import Admin from "@/admin/Admin";
+import User from "@/user/User";
 // import HomeLayout from "./pages/HomeLayout";
 
 const root = document.getElementById("root");
@@ -42,6 +43,10 @@ ReactDOM.createRoot(root!).render(
         {/* Administração */}
         <Route element={<Admin />} path={routes.ADMIN.INDEX}>
           <Route index element={<Admin />} />
+        </Route>
+        {/* Página do Usuário */}
+        <Route element={<User />} path={routes.USER.INDEX}>
+          <Route index element={<User />} />
         </Route>
       </Route>
     </Routes>
