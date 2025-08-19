@@ -1,0 +1,199 @@
+@import url("variables.css");
+
+main#user {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    width: 100%;
+    align-items: stretch;
+}
+
+#user h1 {
+    text-align: start;
+    font-size: 32px;
+}
+
+main#user>div {
+    flex-grow: 1;
+    display: grid;
+    grid-template-columns: 320px auto;
+}
+
+.user-panel {
+    background-color: grey;
+    margin: 32px 64px;
+    border: solid 3px black;
+    border-radius: 8px;
+}
+
+.user-sidebar-panel {
+    display: flex;
+    flex-direction: column;
+    justify-items: center;
+    border: solid 2px black;
+    border-radius: 8px;
+    background-color: white;
+}
+
+
+.user-sidebar-panel>img {
+    height: 320px;
+    width: 320px;
+    padding: 8px;
+    /* border: solid 2px black;  */
+}
+
+.user-sidebar-panel span.badge {
+    font-weight: 600;
+    text-align: center;
+    color: grey;
+    border: solid 3px grey;
+    border-radius: 8px;
+    margin: 0 0.75em;
+}
+
+/* Details Sheet */
+ul.details-sheet {
+    list-style: none;
+    margin: 0;
+    padding: 0.25em 2em 2em;
+}
+.details-sheet {
+    text-align: center;
+    font-size: 16px;
+}
+.details-sheet>li {
+    display: flex;
+    flex-direction: column;
+}
+.details-sheet>li>div,
+.detail-row{
+    display: flex;
+    flex-direction: row;
+}
+.detail-cell label, 
+.detail-row label{
+    font-weight: 600;
+    font-size: 1em;
+    margin: 0;
+}
+.detail-cell label {
+    color: grey;
+}
+.detail-cell span {
+    font-size: 1.2em;
+}
+
+/* Name Callout */
+div.name-callout {
+    text-align: center;
+    font-size: 32px;
+    padding: 1.4em;
+}
+.name-callout h1,h2,h3 {
+    margin: 0;
+}
+.fullname {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 0.25em;
+}
+.github-user {
+    font-family: monospace;
+    font-size: 18px;
+
+}
+.github-user a, 
+.github-user  * {
+    font-weight: 600;
+    padding: 0.25em 0.5em;
+    border-radius: 8px;
+    border: solid 2px rgb(77, 77, 77);
+    color: rgb(77, 77, 77);
+}
+.github-user a:hover {
+    font-weight: 600;
+    background-color: white;
+
+    color: rgb(50, 50, 175);
+    transition: all 0.6s;
+}
+
+.name-callout>.first-row {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    border-bottom: solid 3px rgb(77, 77, 77);
+}
+.name-callout>.first-row sub {
+    position: absolute;
+    right: 120px;
+}
+.name-callout>.second-row {
+    font-size: 24px;
+}
+.name-callout>.third-row {
+    gap: 0.5em;
+    font-size: 18px;
+    color: white;
+}
+.name-callout {
+    margin: 0.5em;
+    border-radius: 12px;
+    background-color: rgba(255, 255, 255, 0.17);
+} 
+
+.skills-panel {
+    margin: 0.5em;
+    margin-bottom: 1.5em;
+}
+.skills-panel .tabs-container {
+    margin: inherit;
+    margin-bottom: 0;
+    padding: 0 2em;
+    padding-left: 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    border: solid 3px black;
+    border-top-left-radius: var(--tabs-container-border-radius);
+    border-top-right-radius: var(--tabs-container-border-radius);
+}
+.skills-panel .tabs-container>.tab {
+    margin: 0;
+    margin-left: 0em;
+    margin-right: 2.2em;
+    padding: 0.2em 0.8em;
+    cursor: pointer;
+    user-select: none;
+    border-top-left-radius: var(--tab-border-radius);
+    border-top-right-radius: var(--tab-border-radius);
+}
+.skills-panel>.tabs-container>.tab:hover {
+    background-color: wheat;
+}
+button.tab {
+    color: black;
+    background-color: transparent;
+    border: none;
+}
+
+/* Skills Content */
+div.skills-content {
+    margin: inherit;
+    margin-top: 0;
+    padding: 0;
+    overflow: auto;
+    height: 40vh;
+    border: solid 3px black;
+    border-bottom-left-radius: var(--tab-border-radius);
+    border-bottom-right-radius: var(--tab-border-radius);
+    border-top: none;
+}
+div.skills-content p {
+    margin: 0;
+    background-color: #fdf8ed;
+    padding: 0 2em;
+    text-indent: 2.5em;
+}
