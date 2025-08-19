@@ -25,7 +25,7 @@ main#user>div {
     border-radius: 8px;
 }
 
-.user-photo-panel {
+.user-sidebar-panel {
     display: flex;
     flex-direction: column;
     justify-items: center;
@@ -35,14 +35,14 @@ main#user>div {
 }
 
 
-.user-photo-panel>img {
+.user-sidebar-panel>img {
     height: 320px;
     width: 320px;
     padding: 8px;
     /* border: solid 2px black;  */
 }
 
-.user-photo-panel span.badge {
+.user-sidebar-panel span.badge {
     font-weight: 600;
     text-align: center;
     color: grey;
@@ -51,4 +51,80 @@ main#user>div {
     margin: 0 0.75em;
 }
 
+/* Details Sheet */
+ul.details-sheet {
+    list-style: none;
+    margin: 0;
+    padding: 0.25em 2em 2em;
+}
+.details-sheet {
+    text-align: center;
+    font-size: 16px;
+}
+.details-sheet>li {
+    display: flex;
+    flex-direction: column;
+}
+.details-sheet>li>div {
+    display: flex;
+    flex-direction: row;
+}
+.details-sheet>li>.detail-cell label {
+    font-weight: 600;
+    font-size: 1em;
+    margin: 0;
+    color: grey;
+}
+.details-sheet>li>.detail-cell span {
+    font-size: 1.2em;
+}
 
+/* Name Callout */
+div.name-callout {
+    text-align: center;
+    font-size: 32px;
+    padding: 1.4em;
+}
+.name-callout h1,h2,h3 {
+    margin: 0;
+}
+.fullname {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 0.25em;
+}
+.github-user {
+    font-family: monospace;
+    font-size: 18px;
+
+}
+.github-user a, 
+.github-user  * {
+    font-weight: 600;
+    padding: 0.25em 0.5em;
+    border-radius: 8px;
+    border: solid 2px rgb(77, 77, 77);
+    color: rgb(77, 77, 77);
+}
+.github-user a:hover {
+    font-weight: 600;
+    background-color: white;
+
+    color: rgb(50, 50, 175);
+    transition: all 0.6s;
+}
+
+.name-callout>.first-row {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    border-bottom: solid 3px rgb(77, 77, 77);
+}
+.name-callout>.first-row sub {
+    position: absolute;
+    right: 120px;
+}
+.name-callout>.second-row {
+    font-size: 24px;
+}
