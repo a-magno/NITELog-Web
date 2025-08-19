@@ -1,3 +1,4 @@
+@import url("variables.css");
 
 main#user {
     display: flex;
@@ -65,17 +66,21 @@ ul.details-sheet {
     display: flex;
     flex-direction: column;
 }
-.details-sheet>li>div {
+.details-sheet>li>div,
+.detail-row{
     display: flex;
     flex-direction: row;
 }
-.details-sheet>li>.detail-cell label {
+.detail-cell label, 
+.detail-row label{
     font-weight: 600;
     font-size: 1em;
     margin: 0;
+}
+.detail-cell label {
     color: grey;
 }
-.details-sheet>li>.detail-cell span {
+.detail-cell span {
     font-size: 1.2em;
 }
 
@@ -127,4 +132,68 @@ div.name-callout {
 }
 .name-callout>.second-row {
     font-size: 24px;
+}
+.name-callout>.third-row {
+    gap: 0.5em;
+    font-size: 18px;
+    color: white;
+}
+.name-callout {
+    margin: 0.5em;
+    border-radius: 12px;
+    background-color: rgba(255, 255, 255, 0.17);
+} 
+
+.skills-panel {
+    margin: 0.5em;
+    margin-bottom: 1.5em;
+}
+.skills-panel .tabs-container {
+    margin: inherit;
+    margin-bottom: 0;
+    padding: 0 2em;
+    padding-left: 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    border: solid 3px black;
+    border-top-left-radius: var(--tabs-container-border-radius);
+    border-top-right-radius: var(--tabs-container-border-radius);
+}
+.skills-panel .tabs-container>.tab {
+    margin: 0;
+    margin-left: 0em;
+    margin-right: 2.2em;
+    padding: 0.2em 0.8em;
+    cursor: pointer;
+    user-select: none;
+    border-top-left-radius: var(--tab-border-radius);
+    border-top-right-radius: var(--tab-border-radius);
+}
+.skills-panel>.tabs-container>.tab:hover {
+    background-color: wheat;
+}
+button.tab {
+    color: black;
+    background-color: transparent;
+    border: none;
+}
+
+/* Skills Content */
+div.skills-content {
+    margin: inherit;
+    margin-top: 0;
+    padding: 0;
+    overflow: auto;
+    height: 40vh;
+    border: solid 3px black;
+    border-bottom-left-radius: var(--tab-border-radius);
+    border-bottom-right-radius: var(--tab-border-radius);
+    border-top: none;
+}
+div.skills-content p {
+    margin: 0;
+    background-color: #fdf8ed;
+    padding: 0 2em;
+    text-indent: 2.5em;
 }
