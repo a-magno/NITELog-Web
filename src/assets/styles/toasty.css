@@ -1,0 +1,35 @@
+button.toasty-container {
+    cursor: default;
+    border: none;
+    outline: none;
+}
+.toasty-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.375);
+
+}
+.toasty-container.hidden {
+    display: none;
+    bottom: -248px;
+    transition: all 0.5s ease-out;
+}
+.toasty {
+    display: block;
+    position: absolute;
+    right: 32px;
+    bottom: 16px;
+    color: black;
+    background-color: white;
+    border: solid 3px black;
+    border-radius: 16px;
+    padding: 1em; 
+}
+.toasty h1 {
+    font-size: 32px;
+    margin: 0;
+    padding: 2em 1em 0.75em;
+}

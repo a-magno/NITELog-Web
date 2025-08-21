@@ -7,6 +7,7 @@ import validateEmail from "../../utils/regexEmail";
 import { loginUser } from "@root/services/api";
 // import Toast from "@root/shared/Toast";
 import niteImg from "@images/nite-logo.png";
+import { Toasty, ToastyError } from "@root/shared/Toasty";
 
 const Login = () => {
   /* 1.* UseState Section */
@@ -31,9 +32,15 @@ const Login = () => {
   const [enableValidation, setEnableValidation] = useState(false);
 
   /*   *.4 Login Error  */
-  const [loginError, setLoginError] = useState<Error>();
+  const [loginError, setLoginError] = useState<Error>({});
 
+  /*   *.5 Loading Page Boolean*/
   const [isLoading, setIsLoading] = useState<boolean>(true);
+
+  /*   *.6 Show Toast Boolean  */
+  const [showToasty, setShowToasty] = useState<boolean>(false);
+  /* --- */
+
   /* 2.  USE EFFECT SECTION */
   useEffect(() => {
     console.log({ form });
@@ -124,33 +131,35 @@ const Login = () => {
             if (error.response) {
               setLoginError({
                 title: "Erro ao efetuar Login",
-                message: error.response.data + "\n" + error.response.headers,
-                code: error.response.code,
+                message: error.response.data?.message || error.message,
+                code: error.status,
                 onClose: () => {},
               });
             } else {
               setLoginError({
                 title: "Erro ao efetuar Login",
-                message: error,
+                message: error.message || "Axios Error",
                 code: 500,
                 onClose: () => {},
               });
             }
-
-            /* Toast({
-              title: "Erro",
-              content: `Erro ao fazer o login: ${error}`,
-              isError: true,
-            }); */
-            // alert(error);
+          })
+          .finally(() => {
+            setShowToasty(true);
+          });
+        //Toast vai aqui
+        /*
             alert(
               `${
                 loginError?.message
-              } - Error Code:${loginError?.code.toString()}`
-            );
-          });
+              } - Error Code:${loginError?.code.toString()}` 
+            );*/
       }
     }, 100);
+
+    setTimeout(() => {
+      setShowToasty(false);
+    }, 5500);
   };
 
   /* 4.* Types n Interfaces */
@@ -263,6 +272,11 @@ const Login = () => {
           </Link>
         </div>
       </form>
+
+      {!showToasty && (
+        <Toasty title={loginError.title} message={loginError.message} />
+      )}
+      {/* {!showToasty && <ToastyError error={loginError} />} */}
     </>
   );
 };
