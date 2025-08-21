@@ -2,7 +2,8 @@ import type React from "react";
 import { Link } from "react-router";
 import { useEffect, useState } from "react";
 import validateEmail from "../../utils/regexEmail";
-import { handleInputChange } from "../../utils/handleInputChange";
+// import { handleInputChange } from "../../utils/handleInputChange";
+// TODO: REMOVER handleInputChange de UTILS 
 import { apiService } from "../../services/apiServices";
 // import Toast from "@root/shared/Toast";
 import niteImg from "@images/nite-logo.png";
@@ -63,13 +64,14 @@ const Login = () => {
     validation.emailRequired == false &&
     validation.emailInvalid == false &&
     validation.passwordInvalid == false;
+
   /*   *.2 Handle Change*/
   const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement>,
+    e: React.InputEvent<HTMLInputElement>,
     fieldName: keyof typeof form
   ) => {
     if (enableValidation == false) setEnableValidation(true);
-    handleInputChange(e, form, setForm, fieldName);
+    setForm({...form, [fieldName]: e.currentTarget.value})
   };
 
   /*   *.3 Handle Submit */
@@ -149,7 +151,7 @@ const Login = () => {
             className="campoEmail"
             value={form.email}
             placeholder="Digite seu email"
-            onChange={(e) => handleChange(e, "email")}
+            onInput={(e) => handleChange(e, "email")}
             onBlur={() => setEnableValidation(true)}
           />
           {validation.emailRequired && (
@@ -173,7 +175,7 @@ const Login = () => {
             className="campoSenha"
             value={form.password}
             placeholder="Digite sua senha"
-            onChange={(e) => handleChange(e, "password")}
+            onInput={(e) => handleChange(e, "password")}
             onBlur={() => setEnableValidation(true)}
           />
           {validation.passwordInvalid && (

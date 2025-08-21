@@ -1,6 +1,7 @@
 import type { Dispatch, SetStateAction } from "react";
 import type React from "react";
 
+// TODO: Verificar a verdadeira função desse utils abaixo
 export const handleInputChange = <T>(
     e:React.ChangeEvent<HTMLInputElement>,
     formData: T,
