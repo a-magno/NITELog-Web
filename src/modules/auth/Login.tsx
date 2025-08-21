@@ -3,7 +3,7 @@ import { Link } from "react-router";
 import { useEffect, useState } from "react";
 import validateEmail from "../../utils/regexEmail";
 // import { handleInputChange } from "../../utils/handleInputChange";
-// TODO: REMOVER handleInputChange de UTILS 
+// TODO: REMOVER handleInputChange de UTILS
 import { apiService } from "../../services/apiServices";
 // import Toast from "@root/shared/Toast";
 import niteImg from "@images/nite-logo.png";
@@ -36,6 +36,7 @@ const Login = () => {
   const [isLoading, setIsLoading] = useState<boolean>(true);
   /* 2.  USE EFFECT SECTION */
   useEffect(() => {
+    console.log({ form });
     /* Finishing Loading */
     setIsLoading(false);
 
@@ -55,7 +56,7 @@ const Login = () => {
 
       setValidation((prev) => prev);
     }
-  }, [form]);
+  }, [form, validation, enableValidation, isLoading]);
 
   /* 3.* FUNCTIONS SECTIONS */
   /*   *.1 isValid (boolean variable) */
@@ -66,12 +67,52 @@ const Login = () => {
     validation.passwordInvalid == false;
 
   /*   *.2 Handle Change*/
-  const handleChange = (
-    e: React.InputEvent<HTMLInputElement>,
+  const handleBlur = (
+    e: React.ChangeEvent<HTMLInputElement>,
     fieldName: keyof typeof form
   ) => {
     if (enableValidation == false) setEnableValidation(true);
-    setForm({...form, [fieldName]: e.currentTarget.value})
+
+    const value = e.currentTarget.value;
+
+    if (fieldName === "email") {
+      setValidation((prev) => ({
+        ...prev,
+        emailRequired: form.email.trim() === "",
+        emailInvalid: !validateEmail(form.email),
+      }));
+    } else if (fieldName === "password") {
+      setValidation((prev) => ({
+        ...prev,
+        passwordInvalid: form.password.trim() === "",
+      }));
+    }
+
+    setForm({ ...form, [fieldName]: value.trim() });
+  };
+
+  /*   *.3 Handle Input */
+  const handleInput = (
+    e: React.FormEvent<HTMLInputElement>,
+    fieldName: keyof typeof form
+  ) => {
+    if (enableValidation == false) setEnableValidation(true);
+
+    const value = e.currentTarget.value;
+
+    if (fieldName === "email") {
+      setValidation((prev) => ({
+        ...prev,
+        emailInvalid: !validateEmail(form.email),
+      }));
+    } else if (fieldName === "password") {
+      setValidation((prev) => ({
+        ...prev,
+        passwordInvalid: form.password.trim() === "",
+      }));
+    }
+
+    setForm({ ...form, [fieldName]: value.trim() });
   };
 
   /*   *.3 Handle Submit */
@@ -151,8 +192,8 @@ const Login = () => {
             className="campoEmail"
             value={form.email}
             placeholder="Digite seu email"
-            onInput={(e) => handleChange(e, "email")}
-            onBlur={() => setEnableValidation(true)}
+            onInput={(e) => handleInput(e, "email")}
+            onBlur={(e) => handleBlur(e, "email")}
           />
           {validation.emailRequired && (
             <div className="error" id="email-required-error">
@@ -175,8 +216,8 @@ const Login = () => {
             className="campoSenha"
             value={form.password}
             placeholder="Digite sua senha"
-            onInput={(e) => handleChange(e, "password")}
-            onBlur={() => setEnableValidation(true)}
+            onInput={(e) => handleInput(e, "password")}
+            onBlur={(e) => handleBlur(e, "password")}
           />
           {validation.passwordInvalid && (
             <div className="error" id="password-required-error">
