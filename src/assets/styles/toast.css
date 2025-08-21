@@ -1,0 +1,14 @@
+.toast-container {
+    display: block;
+    position: absolute;
+    right: 32px;
+    bottom: 16px;
+    background-color: red;
+    border: solid 3px black;
+    padding: 1em; 
+}
+.toast-container.hidden {
+    display: none;
+    bottom: -248px;
+    transition: all 0.5s ease-out;
+}

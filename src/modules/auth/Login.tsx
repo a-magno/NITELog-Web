@@ -4,64 +4,135 @@ import { useEffect, useState } from "react";
 import validateEmail from "../../utils/validateEmail";
 import { handleInputChange } from "../../utils/handleEmailChange";
 import { apiService } from "../../services/apiServices";
-// import niteImg from "@images/nite-logo.png";
+// import Toast from "@root/shared/Toast";
+import niteImg from "@images/nite-logo.png";
 
 const Login = () => {
-  const [formData, setFormData] = useState({
+  /* 1.* UseState Section */
+  /*   *.1 Form Data (username, password) */
+  //TODO: alterar email para username no login
+  const [form, setForm] = useState<LoginFormData>({
     email: "",
     password: "",
   });
-  const [errors, setErrors] = useState({
+
+  /*   *.2 Validation Data  */
+  const [validation, setValidation] = useState<LoginFormValidation>({
     emailRequired: false,
     emailInvalid: false,
     passwordInvalid: false,
   });
 
-  const [isValid, setIsValid] = useState(false);
-  const [validationEnabled, setValidationEnabled] = useState(false);
+  /*   *.3 Validation Boolean */
+  /*const [valid, setValid] = useState<boolean>(false); */
 
+  /*   *.4 Validation Enablement */
+  const [enableValidation, setEnableValidation] = useState(true);
+
+  /*   *.4 Login Error  */
+  const [loginError, setLoginErro] = useState<Error>();
+
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+  /* 2.  USE EFFECT SECTION */
   useEffect(() => {
-    if (validationEnabled) {
-      const newErrors = {
-        emailRequired: formData.email.trim() === "",
+    /* Update Validations */
+    if (enableValidation) {
+      setIsLoading(false);
+      /* const newValidations = {
+        emailRequired: form.email.trim() === "",
         emailInvalid:
-          formData.email.trim() !== "" && !validateEmail(formData.email),
-        passwordInvalid: formData.password.trim() === "",
-      };
+          form.email.trim() !== "" && !validateEmail(form.email),
+        passwordInvalid: form.password.trim() === "",
+      }; */
 
-      setErrors(newErrors);
-      setIsValid(Object.values(newErrors).every((error) => error === false));
+      validation.emailInvalid =
+        form.email.trim() !== "" && !validateEmail(form.email);
+      validation.emailRequired = form.email.trim() === "";
+      validation.passwordInvalid = form.password.trim() === "";
+
+      setValidation((prev) => prev);
     }
-  }, [formData, validationEnabled]);
+  }, [form]);
 
-  const enableValidation = () => setValidationEnabled(true);
-
+  /* 3.* FUNCTIONS SECTIONS */
+  /*   *.1 isValid (boolean variable) */
+  const isValid = (validation: LoginFormValidation): boolean =>
+    validation.emailRequired == false &&
+    validation.emailInvalid == false &&
+    validation.passwordInvalid == false;
+  /*   *.2 Handle Change*/
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement>,
-    fieldName: keyof typeof formData
+    fieldName: keyof typeof form
   ) => {
-    handleInputChange(e, formData, setFormData, fieldName);
+    handleInputChange(e, form, setForm, fieldName);
   };
 
+  /*   *.3 Handle Submit */
   const handleFormSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    enableValidation();
+    // enableValidation();
+    setEnableValidation(true);
 
     setTimeout(() => {
-      if (isValid) {
+      if (isValid(validation)) {
         apiService
-          .loginUser(formData)
+          .loginUser(form)
           .then((response) => alert(response))
-          .catch((error) => alert(error));
+          .catch((error) => {
+            /* Toast({
+              title: "Erro",
+              content: `Erro ao fazer o login: ${error}`,
+              isError: true,
+            }); */
+            // alert(error);
+            alert(error);
+          });
       }
     }, 100);
   };
 
+  /* 4.* Types n Interfaces */
+  type LoginFormData = {
+    email: string;
+    password: string;
+  };
+
+  type LoginFormValidation = {
+    emailRequired: boolean | true;
+    emailInvalid: boolean | true;
+    passwordInvalid: boolean | true;
+  };
+
+  type Error = {
+    title: string;
+    message: string;
+    code: number;
+    onClose: () => void;
+  };
+
+  /* DEBUG */
+  console.log({
+    validationfields:
+      validation.emailInvalid &&
+      validation.emailRequired &&
+      validation.passwordInvalid,
+    isValid: isValid(validation),
+    validationEnabled: enableValidation,
+  });
+  /* 5. Render */
+  if (isLoading) {
+    return (
+      <>
+        <h3>Is Loading</h3>
+      </>
+    );
+  }
   return (
     <>
-      {/* <div className="logoNite">
+      <div className="logoNite">
         <img src={niteImg} alt="Logo Nite" style={{ width: "350px" }} />
-      </div> */}
+      </div>
 
       <form className="forms" onSubmit={handleFormSubmit}>
         <div>
@@ -71,17 +142,17 @@ const Login = () => {
             name="email"
             id="email"
             className="campoEmail"
-            value={formData.email}
+            value={form.email}
             placeholder="Digite seu email"
             onChange={(e) => handleChange(e, "email")}
-            onBlur={enableValidation}
+            onBlur={() => setEnableValidation(true)}
           />
-          {errors.emailRequired && (
+          {validation.emailRequired && (
             <div className="error" id="email-required-error">
               Campo obrigatório
             </div>
           )}
-          {!errors.emailRequired && errors.emailInvalid && (
+          {!validation.emailRequired && validation.emailInvalid && (
             <div className="error" id="email-invalid-error">
               Email inválido
             </div>
@@ -95,12 +166,12 @@ const Login = () => {
             id="password"
             name="password"
             className="campoSenha"
-            value={formData.password}
+            value={form.password}
             placeholder="Digite sua senha"
             onChange={(e) => handleChange(e, "password")}
-            onBlur={enableValidation}
+            onBlur={() => setEnableValidation(true)}
           />
-          {errors.passwordInvalid && (
+          {validation.passwordInvalid && (
             <div className="error" id="password-required-error">
               Campo obrigatório
             </div>
@@ -117,7 +188,7 @@ const Login = () => {
             type="submit"
             className="entrar"
             id="login-button"
-            disabled={!isValid}
+            disabled={!isValid(validation)}
           >
             Entrar
           </button>
