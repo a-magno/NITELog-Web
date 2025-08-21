@@ -1,8 +1,8 @@
 import type React from "react";
 import { Link } from "react-router";
 import { useEffect, useState } from "react";
-import validateEmail from "../../utils/validateEmail";
-import { handleInputChange } from "../../utils/handleEmailChange";
+import validateEmail from "../../utils/regexEmail";
+import { handleInputChange } from "../../utils/handleInputChange";
 import { apiService } from "../../services/apiServices";
 // import Toast from "@root/shared/Toast";
 import niteImg from "@images/nite-logo.png";
@@ -27,7 +27,7 @@ const Login = () => {
   /*const [valid, setValid] = useState<boolean>(false); */
 
   /*   *.4 Validation Enablement */
-  const [enableValidation, setEnableValidation] = useState(true);
+  const [enableValidation, setEnableValidation] = useState(false);
 
   /*   *.4 Login Error  */
   const [loginError, setLoginErro] = useState<Error>();
@@ -35,9 +35,11 @@ const Login = () => {
   const [isLoading, setIsLoading] = useState<boolean>(true);
   /* 2.  USE EFFECT SECTION */
   useEffect(() => {
+    /* Finishing Loading */
+    setIsLoading(false);
+
     /* Update Validations */
     if (enableValidation) {
-      setIsLoading(false);
       /* const newValidations = {
         emailRequired: form.email.trim() === "",
         emailInvalid:
@@ -56,7 +58,8 @@ const Login = () => {
 
   /* 3.* FUNCTIONS SECTIONS */
   /*   *.1 isValid (boolean variable) */
-  const isValid = (validation: LoginFormValidation): boolean =>
+  const isValid = (): boolean =>
+    enableValidation &&
     validation.emailRequired == false &&
     validation.emailInvalid == false &&
     validation.passwordInvalid == false;
@@ -65,6 +68,7 @@ const Login = () => {
     e: React.ChangeEvent<HTMLInputElement>,
     fieldName: keyof typeof form
   ) => {
+    if (enableValidation == false) setEnableValidation(true);
     handleInputChange(e, form, setForm, fieldName);
   };
 
@@ -75,7 +79,7 @@ const Login = () => {
     setEnableValidation(true);
 
     setTimeout(() => {
-      if (isValid(validation)) {
+      if (isValid()) {
         apiService
           .loginUser(form)
           .then((response) => alert(response))
@@ -117,14 +121,15 @@ const Login = () => {
       validation.emailInvalid &&
       validation.emailRequired &&
       validation.passwordInvalid,
-    isValid: isValid(validation),
+    isValid: isValid(),
     validationEnabled: enableValidation,
   });
   /* 5. Render */
   if (isLoading) {
     return (
       <>
-        <h3>Is Loading</h3>
+        <h3>Carregando</h3>
+        <span>...</span>
       </>
     );
   }
@@ -188,7 +193,7 @@ const Login = () => {
             type="submit"
             className="entrar"
             id="login-button"
-            disabled={!isValid(validation)}
+            disabled={!isValid()}
           >
             Entrar
           </button>

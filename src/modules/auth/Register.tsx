@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import validateEmail from "../../utils/validateEmail";
-import { handleInputChange } from "../../utils/handleEmailChange";
+import validateEmail from "../../utils/regexEmail";
+import { handleInputChange } from "../../utils/handleInputChange";
 import { apiService } from "../../services/apiServices";
 import { Link } from "react-router";
 import niteImg from "@images/nite-logo.png";
