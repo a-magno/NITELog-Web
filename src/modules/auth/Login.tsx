@@ -59,26 +59,18 @@ const Login = () => {
   }, [form, validation, enableValidation, isLoading]);
 
   /* 3.* FUNCTIONS SECTIONS */
-  /*   *.1 isValid (boolean variable) */
+  /*   *.1 isValid */
   const isValid = (): boolean =>
     enableValidation &&
     validation.emailRequired == false &&
     validation.emailInvalid == false &&
     validation.passwordInvalid == false;
 
-  /*   *.2 Handle Change*/
-  const handleBlur = (
-    e: React.ChangeEvent<HTMLInputElement>,
-    fieldName: keyof typeof form
-  ) => {
-    if (enableValidation == false) setEnableValidation(true);
-
-    const value = e.currentTarget.value;
-
+  /*  *.2 validateForm  */
+  const validateForm = (fieldName: string) => {
     if (fieldName === "email") {
       setValidation((prev) => ({
         ...prev,
-        emailRequired: form.email.trim() === "",
         emailInvalid: !validateEmail(form.email),
       }));
     } else if (fieldName === "password") {
@@ -87,7 +79,18 @@ const Login = () => {
         passwordInvalid: form.password.trim() === "",
       }));
     }
+  };
 
+  /*   *.2 Handle Change*/
+  const handleBlur = (
+    e: React.ChangeEvent<HTMLInputElement>,
+    fieldName: keyof typeof form
+  ): void => {
+    if (enableValidation == false) setEnableValidation(true);
+
+    const value = e.currentTarget.value;
+
+    validateForm(fieldName);
     setForm({ ...form, [fieldName]: value.trim() });
   };
 
@@ -100,18 +103,7 @@ const Login = () => {
 
     const value = e.currentTarget.value;
 
-    if (fieldName === "email") {
-      setValidation((prev) => ({
-        ...prev,
-        emailInvalid: !validateEmail(form.email),
-      }));
-    } else if (fieldName === "password") {
-      setValidation((prev) => ({
-        ...prev,
-        passwordInvalid: form.password.trim() === "",
-      }));
-    }
-
+    validateForm(fieldName);
     setForm({ ...form, [fieldName]: value.trim() });
   };
 
