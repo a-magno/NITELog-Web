@@ -19,20 +19,20 @@ function getApiVersion() {
   // loginUser
   
 export async function loginUser(auth: LoginPayload) {
-  axios({
+  return axios({
     method: 'POST',
     url: `${API_BASE_URL}/${USER_CREATE_URL}`,
     data: {
       email: auth.email,
       password: auth.password,
     }
-  }).then((response) => {
+  })/* .then((response) => {
     return {
       code: 200,
       status: response.status,
       api_version: getApiVersion()
     }
-  })
+  }) */
 }
 
 // registerUser

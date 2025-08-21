@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import validateEmail from "../../utils/regexEmail";
 // import { handleInputChange } from "../../utils/handleInputChange";
 // TODO: REMOVER handleInputChange de UTILS
-import { apiService } from "../../services/apiServices";
+import { loginUser } from "@root/services/api";
 // import Toast from "@root/shared/Toast";
 import niteImg from "@images/nite-logo.png";
 
@@ -31,7 +31,7 @@ const Login = () => {
   const [enableValidation, setEnableValidation] = useState(false);
 
   /*   *.4 Login Error  */
-  const [loginError, setLoginErro] = useState<Error>();
+  const [loginError, setLoginError] = useState<Error>();
 
   const [isLoading, setIsLoading] = useState<boolean>(true);
   /* 2.  USE EFFECT SECTION */
@@ -115,17 +115,39 @@ const Login = () => {
 
     setTimeout(() => {
       if (isValid()) {
-        apiService
-          .loginUser(form)
-          .then((response) => alert(response))
+        loginUser(form)
+          .then((response) => {
+            console.log(response);
+            alert(response);
+          })
           .catch((error) => {
+            if (error.response) {
+              setLoginError({
+                title: "Erro ao efetuar Login",
+                message: error.response.data + "\n" + error.response.headers,
+                code: error.response.code,
+                onClose: () => {},
+              });
+            } else {
+              setLoginError({
+                title: "Erro ao efetuar Login",
+                message: error,
+                code: 500,
+                onClose: () => {},
+              });
+            }
+
             /* Toast({
               title: "Erro",
               content: `Erro ao fazer o login: ${error}`,
               isError: true,
             }); */
             // alert(error);
-            alert(error);
+            alert(
+              `${
+                loginError?.message
+              } - Error Code:${loginError?.code.toString()}`
+            );
           });
       }
     }, 100);
