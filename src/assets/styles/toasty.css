@@ -31,5 +31,9 @@ button.toasty-container {
 .toasty h1 {
     font-size: 32px;
     margin: 0;
-    padding: 2em 1em 0.75em;
+    padding: 2em 0.75em 1em;
+}
+.toasty h3 {
+    font-size: 24px;
+    padding-bottom: 2em;
 }
